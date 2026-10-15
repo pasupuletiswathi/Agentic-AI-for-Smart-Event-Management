@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__, template_folder='milestone1/templates')
+app = Flask(__name__, template_folder="templates")
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///eventops.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -1136,9 +1136,11 @@ def contact():
 
 @app.route('/about')
 def about():
-    from datetime import datetime, timezone
-    return render_template('about.html', now=datetime.now(timezone.utc))
+    return render_template('about.html')
 
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 # ------------------ Main ------------------
 with app.app_context():
     db.create_all()
